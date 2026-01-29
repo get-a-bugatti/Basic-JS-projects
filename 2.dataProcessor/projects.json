@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Alpha Cloud",
+    "metadata": { "tags": ["cloud", "infra"], "priority": "high" },
+    "budget": 50000,
+    "status": "active",
+    "deadline": "2024-12-01"
+  },
+  {
+    "id": 2,
+    "title": "Beta App",
+    "metadata": { "tags": ["mobile"], "priority": "low" },
+    "budget": 12000,
+    "status": "active",
+    "deadline": "2023-11-15"
+  },
+  {
+    "id": 3,
+    "title": "Old System",
+    "metadata": { "tags": ["legacy"], "priority": "medium" },
+    "budget": 5000,
+    "status": "archived",
+    "deadline": "2022-01-10"
+  }
+]

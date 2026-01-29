@@ -1,0 +1,15 @@
+<input id="search" placeholder="Type something ..." />
+
+<script>
+  const input = document.getElementById("search");
+
+  function search(value) {
+    console.log("Searching for ...", value);
+  }
+
+  const debouncedSearch = debounce(search, 500);
+
+  input.addEventListener("input", (e) => {
+    console.log("Searching for ...", e.target.value);
+  });
+</script>

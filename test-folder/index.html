@@ -1,15 +1,124 @@
-<input id="search" placeholder="Type something ..." />
+<ul class="image-list">
+  <li>
+    <img
+      src="https://images.unsplash.com/photo-1593642634367-d91a135587b5?auto=format&w=1200"
+      alt="Mountain Landscape"
+    />
+  </li>
+  <li>
+    <img
+      src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&w=1200"
+      alt="Water and Hills"
+    />
+  </li>
+  <li>
+    <img
+      src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&w=1200"
+      alt="Foggy Lake Mountains"
+    />
+  </li>
+  <li>
+    <img
+      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&w=1200"
+      alt="Forest Lake View"
+    />
+  </li>
+  <li>
+    <img
+      src="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&w=1200"
+      alt="Pexels Nature Lake"
+    />
+  </li>
+</ul>
 
-<script>
-  const input = document.getElementById("search");
-
-  function search(value) {
-    console.log("Searching for ...", value);
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
   }
 
-  const debouncedSearch = debounce(search, 500);
+  li {
+    margin: 10px;
+  }
 
-  input.addEventListener("input", (e) => {
-    console.log("Searching for ...", e.target.value);
-  });
+  img {
+    width: 200px;
+    height: 100px;
+  }
+</style>
+
+<script>
+  //   const elem = document.getElementsByClassName("image-list")[0];
+
+  //   elem.addEventListener("click", function (e) {
+  //     e.target.style.display = "none";
+  //   });
 </script>
+
+<!-- ---------------------------------------- -->
+<!-- Instead of changing styles, you can actually remove the Elements , as well. And,
+you should never just select the `img` tag, instead u should target the
+parentNode which is `li` element. -->
+
+<script>
+  //   const elem = document.querySelector(".image-list");
+
+  //   elem.addEventListener("click", function (e) {
+  //     console.log("target", e.target); // element actually clicked (event happened to)
+  //     console.log("currentTarget", e.currentTarget); // element listener actually attached ot .
+  //   });
+</script>
+
+<script>
+  const elem = document.querySelector(".image-list");
+
+  elem.addEventListener("click", function (e) {
+    console.log(e.target.parentNode);
+
+    // two ways to remove the element
+
+    let removeIt = e.target.parentNode;
+
+    removeIt.remove();
+    removeIt.parentNode.removeChild();
+  });
+
+  // you can also make checks using .tagName
+  // .id, etc.
+</script>
+
+<!-- all properties you may find useful -->
+
+<!-- type → tells what event happened (click, keydown, etc.)
+
+timeStamp → time (ms) when the event occurred since page load
+
+defaultPrevented → true if preventDefault() was called
+
+target → element where the event originally happened
+
+currentTarget → element whose event listener is running
+
+toElement → legacy property for mouse target (avoid)
+
+srcElement → old IE version of target
+
+clientX → mouse X position inside browser viewport
+
+clientY → mouse Y position inside browser viewport
+
+screenX → mouse X position on entire screen
+
+screenY → mouse Y position on entire screen
+
+altKey → true if Alt key was held
+
+ctrlKey → true if Ctrl key was held
+
+shiftKey → true if Shift key was held
+
+keyCode → deprecated numeric key value (don’t use)
+
+key → actual key value pressed ("a", "Enter")
+
+code → physical key on keyboard ("KeyA", "Enter") -->

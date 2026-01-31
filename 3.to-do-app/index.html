@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/form.css" />
+    <link rel="stylesheet" href="styles/tasks.css" />
+    <title>To-do App</title>
+  </head>
+  <body>
+    <header class="header">To-do App</header>
+    <main class="content">
+      <div class="form-container">
+        <form action="#" method="post" class="input-form">
+          <label for="taskname">Enter Your Task :</label>
+          <input
+            type="text"
+            name="taskname"
+            id="taskname"
+            class="taskname-input"
+          />
+
+          <label for="deadline">When To Finish By ?</label>
+          <input
+            type="date"
+            name="deadline"
+            id="deadline"
+            class="deadline-input"
+          />
+
+          <input type="hidden" name="taskId" value="" />
+          <button type="submit" class="add-task-btn">Add task</button>
+        </form>
+      </div>
+      <hr />
+      <h3>Tasks :</h3>
+      <div class="task-container">
+        <ul class="task-list"></ul>
+      </div>
+    </main>
+  </body>
+  <script src="./script.js"></script>
+</html>

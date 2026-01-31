@@ -1,0 +1,17 @@
+.header {
+    position: fixed;
+    height: 80px;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Cedarville cursive";
+    background-color: rgb(184, 119, 246);
+    color: white;
+}

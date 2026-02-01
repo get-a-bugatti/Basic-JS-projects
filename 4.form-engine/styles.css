@@ -1,0 +1,24 @@
+p {
+    font-family: Arial;
+}
+
+form {
+    width: 200px;
+    margin: 20px;
+    padding: 10px;
+}
+
+input {
+    margin-bottom: 20px;
+}
+
+
+.erritem {
+    color: red;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.submit-btn {
+    cursor: pointer;
+}

@@ -1,70 +1,74 @@
 const form = document.querySelector(".input-form");
 const ul = document.querySelector(".task-list");
 
+function renderTask(task) {
+  let li = document.createElement("li");
+  li.classList.add("task-item");
+  li.setAttribute("data-id", String(task.id));
+
+  const startDiv = document.createElement("div");
+  startDiv.classList.add("start-container");
+
+  const statusContainer = document.createElement("div");
+  statusContainer.classList.add("task-status-container");
+
+  const statusInput = document.createElement("input");
+  statusInput.type = "checkbox";
+  statusInput.name = "status";
+  statusInput.id = "status";
+  statusInput.checked = !task.active;
+  statusInput.classList.add("status-input");
+
+  statusContainer.appendChild(statusInput);
+
+  const taskNameDiv = document.createElement("div");
+  taskNameDiv.classList.add("task-name-container");
+
+  const taskNameP = document.createElement("p");
+  taskNameP.classList.add("task-name");
+
+  if (!task.active) {
+    // if task is completed.
+    targetTaskName.classList.add("completed");
+  }
+
+  taskNameDiv.append(taskNameP);
+
+  startDiv.append(statusContainer);
+  startDiv.append(taskNameDiv);
+
+  const endDiv = document.createElement("div");
+  endDiv.classList.add("end-container");
+
+  const taskDeadlineDiv = document.createElement("div");
+  taskDeadlineDiv.classList.add("task-deadline");
+
+  const editTaskBtn = document.createElement("button");
+  editTaskBtn.classList.add("edit-task-btn");
+  editTaskBtn.textContent = "Edit";
+
+  const deleteTaskBtn = document.createElement("button");
+  deleteTaskBtn.classList.add("delete-task-btn");
+  deleteTaskBtn.textContent = "X";
+
+  endDiv.append(taskDeadlineDiv);
+  endDiv.append(editTaskBtn);
+  endDiv.append(deleteTaskBtn);
+
+  taskNameP.textContent = task.name;
+  taskDeadlineDiv.textContent = task.deadline;
+
+  li.append(startDiv, endDiv);
+  return li;
+}
+
 document.addEventListener("DOMContentLoaded", function (e) {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
   tasks = tasks || [];
 
   tasks.forEach((el) => {
-    let li = document.createElement("li");
-    li.classList.add("task-item");
-    li.setAttribute("data-id", String(el.id));
-
-    const startDiv = document.createElement("div");
-    startDiv.classList.add("start-container");
-
-    const statusContainer = document.createElement("div");
-    statusContainer.classList.add("task-status-container");
-
-    const statusInput = document.createElement("input");
-    statusInput.type = "checkbox";
-    statusInput.name = "status";
-    statusInput.id = "status";
-    statusInput.checked = el.active;
-    statusInput.classList.add("status-input");
-
-    statusContainer.appendChild(statusInput);
-
-    const taskNameDiv = document.createElement("div");
-    taskNameDiv.classList.add("task-name-container");
-
-    const taskNameP = document.createElement("p");
-    taskNameP.classList.add("task-name");
-
-    taskNameDiv.append(taskNameP);
-
-    startDiv.append(statusContainer);
-    startDiv.append(taskNameDiv);
-
-    const endDiv = document.createElement("div");
-    endDiv.classList.add("end-container");
-
-    const taskDeadlineDiv = document.createElement("div");
-    taskDeadlineDiv.classList.add("task-deadline");
-
-    const editTaskBtn = document.createElement("button");
-    editTaskBtn.classList.add("edit-task-btn");
-    editTaskBtn.textContent = "Edit";
-
-    const deleteTaskBtn = document.createElement("button");
-    deleteTaskBtn.classList.add("delete-task-btn");
-    deleteTaskBtn.textContent = "X";
-
-    endDiv.append(taskDeadlineDiv);
-    endDiv.append(editTaskBtn);
-    endDiv.append(deleteTaskBtn);
-
-    taskNameP.textContent = el.name;
-    taskDeadlineDiv.textContent = el.deadline;
-
-    li.append(startDiv, endDiv);
+    const li = renderTask(el);
     ul.append(li);
-
-    const targetTaskName = li.querySelector(".task-name");
-
-    if (el.active) {
-      targetTaskName.classList.add("completed");
-    }
   });
 });
 
@@ -83,6 +87,7 @@ form.addEventListener("submit", function (e) {
     : -1;
 
   if (taskIdx !== -1) {
+    // edit existing task.
     tasks = tasks.map((el) => {
       return el.id === Number(targetTaskId)
         ? { ...el, name: taskName, deadline: taskDeadline }
@@ -97,6 +102,7 @@ form.addEventListener("submit", function (e) {
     nameDiv.textContent = taskName;
     deadlineDiv.textContent = taskDeadline;
   } else {
+    // create new task.
     const newTask = {
       id: Date.now(),
       active: true,
@@ -106,59 +112,9 @@ form.addEventListener("submit", function (e) {
     tasks.push(newTask);
 
     // create  HTML elements
-    let li = document.createElement("li");
-    li.classList.add("task-item");
-    li.setAttribute("data-id", String(newTask.id));
-
-    const startDiv = document.createElement("div");
-    startDiv.classList.add("start-container");
-
-    const statusContainer = document.createElement("div");
-    statusContainer.classList.add("task-status-container");
-
-    const statusInput = document.createElement("input");
-    statusInput.type = "checkbox";
-    statusInput.name = "status";
-    statusInput.id = "status";
-    statusInput.classList.add("status-input");
-
-    statusContainer.appendChild(statusInput);
-
-    const taskNameDiv = document.createElement("div");
-    taskNameDiv.classList.add("task-name-container");
-
-    const taskNameP = document.createElement("p");
-    taskNameP.classList.add("task-name");
-
-    taskNameDiv.append(taskNameP);
-
-    startDiv.append(statusContainer);
-    startDiv.append(taskNameDiv);
-
-    const endDiv = document.createElement("div");
-    endDiv.classList.add("end-container");
-
-    const taskDeadlineDiv = document.createElement("div");
-    taskDeadlineDiv.classList.add("task-deadline");
-
-    const editTaskBtn = document.createElement("button");
-    editTaskBtn.classList.add("edit-task-btn");
-    editTaskBtn.textContent = "Edit";
-
-    const deleteTaskBtn = document.createElement("button");
-    deleteTaskBtn.classList.add("delete-task-btn");
-    deleteTaskBtn.textContent = "X";
-
-    endDiv.append(taskDeadlineDiv);
-    endDiv.append(editTaskBtn);
-    endDiv.append(deleteTaskBtn);
-
-    taskNameP.textContent = newTask.name;
-    taskDeadlineDiv.textContent = newTask.deadline;
+    const li = renderTask(newTask);
 
     ul.append(li);
-    li.append(startDiv);
-    li.append(endDiv);
   }
 
   // save changes to localStorage.

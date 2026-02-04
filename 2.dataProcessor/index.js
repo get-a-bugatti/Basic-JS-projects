@@ -43,7 +43,7 @@ function normalizeUser(user) {
 }
 
 function isActiveWithName(user) {
-  return user.name && user.status == "active";
+  return user.name && user.status === "active";
 }
 
 function getDaysSinceLastLogin(dateValue) {

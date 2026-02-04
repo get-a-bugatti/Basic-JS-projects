@@ -1,0 +1,98 @@
+#form-container {
+    background-color: rgb(100, 107, 136);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+body {
+    padding-top: 100px;
+    font-family: Arial;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#name {
+    height: 20px;
+}
+
+.info-box {
+    display: flex;
+    flex-direction: row;
+    margin-left: 60px;
+}
+
+
+#name {
+    flex: 1;
+}
+
+.time-box {
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    margin-left: 10px;
+}
+
+#hours, #mins, #secs {
+    height: 20px;
+    font-size: 18px;
+}
+
+.button-box {
+    margin-right: 40px;
+}
+
+#submit-btn {
+    height: 30px;
+    background-color: rgb(79, 197, 237);
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#submit-btn:hover {
+   opacity: 0.75;
+}
+#submit-btn:active {
+    opacity: 0.5;
+}
+
+.start-btn {
+    cursor: pointer;
+}
+
+.resume-btn, .pause-btn, .cancel-btn {
+    height: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pause-btn {
+    font-size: 12px;
+}
+
+.task-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: lightblue;
+}
+
+#list-container {
+    width: 600px;
+    padding: 20px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}

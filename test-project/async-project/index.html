@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+    <style>
+      button {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Chai aur code</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <script>
+      const body = document.querySelector("body");
+      const startBtn = document.getElementById("start");
+      const stopBtn = document.getElementById("stop");
+
+      function generateRandColor() {
+        const hex = "0123456789ABCDEF";
+        let color = "#";
+
+        for (let i = 0; i < 6; i++) {
+          color += hex[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function changeBackground() {
+        body.style.backgroundColor = generateRandColor();
+      }
+
+      let intervalId;
+      startBtn.addEventListener("click", function () {
+        if (!intervalId) {
+          intervalId = setInterval(changeBackground, 1000);
+        }
+      });
+
+      stopBtn.addEventListener("click", function () {
+        clearInterval(intervalId);
+        intervalId = null;
+      });
+    </script>
+  </body>
+</html>

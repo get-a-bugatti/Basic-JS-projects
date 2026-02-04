@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Task Reminder</title>
+  </head>
+  <body>
+    <div id="form-container">
+      <form id="input-form">
+        <div class="info-box">
+          <div class="name-box">
+            <!-- Task name -->
+            <input type="text" name="taskName" id="name" />
+          </div>
+          <div class="time-box">
+            <!-- Time inputs -->
+            <input type="text" placeholder="00" id="hours" />
+
+            <input type="text" placeholder="00" id="mins" />
+
+            <input type="text" placeholder="00" id="secs" />
+          </div>
+        </div>
+
+        <div class="button-box">
+          <!-- Submit button -->
+          <button type="submit" id="submit-btn">Add Task</button>
+        </div>
+      </form>
+    </div>
+    <div id="list-container">
+      <h2>Task list :</h2>
+      <ul id="task-list"></ul>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

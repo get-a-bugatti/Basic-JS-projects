@@ -31,18 +31,6 @@ function capitalizeWord(word) {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
-function debounce(fn, delay = 500) {
-  let timer;
-
-  return (...args) => {
-    clearTimeout(timer);
-
-    timer = setTimeout(() => {
-      fn.apply(this, args);
-    }, delay);
-  };
-}
-
 function retrieveInputValue(name) {
   return document.querySelector(`[name="${name}"]`).value;
 }
@@ -148,12 +136,6 @@ function showError(form, fieldName, errors) {
   });
 }
 
-// function clearError(form) {
-//   const targetErrList = form.querySelectorAll(".errlist");
-//   targetErrList.innerHTML = "";
-// }
-
-// const debouncedInputValidation = debounce(handleOnInputValidation);
 form.addEventListener("change", function (e) {
   handleOnInputValidation(e.target.name, e.target.value);
 });

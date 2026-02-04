@@ -66,6 +66,12 @@ function startCountdown(taskObj) {
   const timerEl = removeTaskEl.querySelector(".task-timer");
 
   let countdown = taskObj.duration;
+  if (taskObj.status === "idle" || taskObj.status === "paused") {
+    taskObj.status = "running";
+  } else {
+    console.log("Timer is already running.");
+    return;
+  }
 
   let intervalId = setInterval(() => {
     console.log(countdown / 1000);
@@ -104,10 +110,9 @@ function pauseCountdown(taskObj) {
 
   clearInterval(taskObj.intervalId);
 
-  console.log("during pause, taskObj:", taskObj);
   taskObj.intervalId = null;
-  taskObj.duration = Number(timerEl.textContent) * 1000;
-  console.log("taskObj's duraiton", taskObj.duration);
+  taskObj.status = "paused";
+  taskObj.duration = Number(timerEl.textContent) * 1000 - 1000;
 
   saveTask(taskObj);
 }
@@ -177,7 +182,6 @@ tListContainer.addEventListener("click", function (e) {
     // const taskObj = findTaskFromStorage(targetId);
     pauseCountdown(taskObj);
   } else if (e.target.classList.contains("resume-btn")) {
-    console.log(taskObj);
     startCountdown(taskObj);
   } else if (e.target.classList.contains("cancel-btn")) {
     clearInterval(taskObj.intervalId);

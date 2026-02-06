@@ -13,8 +13,23 @@ function displayExistingTasks() {
   });
 }
 
+function handleRefreshStatus() {
+  // to handle status of tasks if page refresh while countdown is running.
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks = tasks.map((task) => {
+    return {
+      ...task,
+      status: "idle",
+    };
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   displayExistingTasks();
+  handleRefreshStatus();
 });
 
 function createTaskEl(taskObj) {
@@ -74,7 +89,7 @@ function startCountdown(taskObj) {
   }
 
   let intervalId = setInterval(() => {
-    console.log(countdown / 1000);
+    console.log(countdown);
 
     if (countdown <= 0) {
       clearInterval(intervalId);
@@ -87,8 +102,8 @@ function startCountdown(taskObj) {
       return intervalId;
     }
 
-    timerEl.textContent = countdown / 1000;
-    countdown -= 1000;
+    timerEl.textContent = countdown;
+    countdown -= 1;
   }, 1000);
 
   taskObj.intervalId = intervalId;
@@ -112,7 +127,7 @@ function pauseCountdown(taskObj) {
 
   taskObj.intervalId = null;
   taskObj.status = "paused";
-  taskObj.duration = Number(timerEl.textContent) * 1000 - 1000;
+  taskObj.duration = Number(timerEl.textContent) - 1;
 
   saveTask(taskObj);
 }
@@ -149,8 +164,7 @@ form.addEventListener("submit", function (e) {
   const mins = document.getElementById("mins").value || 0;
   const secs = document.getElementById("secs").value || 0;
 
-  const duration =
-    (Number(hours) * 3600 + Number(mins) * 60 + Number(secs)) * 1000;
+  const duration = Number(hours) * 3600 + Number(mins) * 60 + Number(secs);
 
   const newTaskObj = {
     id: crypto.randomUUID(),
@@ -164,7 +178,7 @@ form.addEventListener("submit", function (e) {
   saveTask(newTaskObj);
 
   const tTimerDiv = newTaskEl.querySelector(".task-timer");
-  tTimerDiv.textContent = duration / 1000;
+  tTimerDiv.textContent = duration;
   tListContainer.append(newTaskEl);
 
   // let intervalId = startCountdown(tName, newTaskEl, tTimerDiv, duration);

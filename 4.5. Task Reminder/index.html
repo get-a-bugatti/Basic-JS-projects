@@ -9,22 +9,40 @@
   <body>
     <div id="form-container">
       <form id="input-form">
-        <div class="info-box">
+        <div class="start-box">
           <div class="name-box">
             <!-- Task name -->
             <input type="text" name="taskName" id="name" />
           </div>
           <div class="time-box">
             <!-- Time inputs -->
-            <input type="text" placeholder="00" id="hours" />
+            <input
+              type="number"
+              placeholder="hours"
+              id="hours"
+              min="0"
+              max="60"
+            />
 
-            <input type="text" placeholder="00" id="mins" />
+            <input
+              type="number"
+              placeholder="mins"
+              id="mins"
+              min="0"
+              max="60"
+            />
 
-            <input type="text" placeholder="00" id="secs" />
+            <input
+              type="number"
+              placeholder="secs"
+              id="secs"
+              min="0"
+              max="60"
+            />
           </div>
         </div>
 
-        <div class="button-box">
+        <div class="end-box">
           <!-- Submit button -->
           <button type="submit" id="submit-btn">Add Task</button>
         </div>

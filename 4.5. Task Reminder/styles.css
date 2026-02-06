@@ -15,7 +15,17 @@ body {
 form {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+}
+
+.start-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.end-box {
+    margin-left: auto;
 }
 
 #name {
@@ -35,13 +45,15 @@ form {
 
 .time-box {
     display: grid;
-    grid-template-columns: repeat(3, 30px);
-    margin-left: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 20px;
 }
 
 #hours, #mins, #secs {
     height: 20px;
     font-size: 18px;
+    width: fit-content;
+    margin-right: 5px;
 }
 
 .button-box {

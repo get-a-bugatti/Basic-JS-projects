@@ -1,8 +1,9 @@
-// making a apiClient wrapper that uses the global timeout window strategy i.e., a fixed window time, and within it all or any reattempts for fetch must be made.
+// making a variation of apiClient wrapper
+// one that uses the global timeout window strategy
+// i.e., (a fixed window time, and within it all or any reattempts for fetch must be made.)
 
 async function apiClient(url, { timeout, attempts }) {
   const signal = AbortSignal.timeout(timeout);
-  // let tryCount = attempts;
 
   async function internalRetry(tryCount) {
     console.log(`Attempts remaining : ${tryCount}`);

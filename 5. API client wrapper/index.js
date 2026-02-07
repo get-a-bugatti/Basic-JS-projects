@@ -1,7 +1,6 @@
 async function apiClient(url, options) {
-  const signal = AbortSignal.timeout(options.timeout);
-
   async function intervalRetry(tryCount) {
+    const signal = AbortSignal.timeout(options.timeout);
     try {
       console.log(`Attempting fetch: attempts left = ${tryCount}`);
 
@@ -63,7 +62,7 @@ async function apiClient(url, options) {
 apiClient.parallel = async function (urls, options) {
   return Promise.allSettled(
     urls.map((url) => {
-      apiClient(url, options);
+      return apiClient(url, options);
     })
   );
 };
@@ -71,11 +70,12 @@ apiClient.parallel = async function (urls, options) {
 apiClient.fastest = async function (urls, options) {
   return Promise.race(
     urls.map((url) => {
-      apiClient(url, options);
+      return apiClient(url, options);
     })
   );
 };
 
+// ======= NORMAL apiClient main() calls ==========
 async function main(url, attempts) {
   const data = await apiClient(url, attempts);
   return data;
@@ -89,41 +89,13 @@ async function main(url, attempts) {
 //     console.log(err);
 //   });
 
-// main("https://fake-domain-2398.com/whatever", { timeout: 15000, attempts: 3 })
-//   .then((data) => {
-//     console.log(data);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-// async function testParallelMixed() {
-//   console.log("\n=== testParallelMixed ===");
-
-//   const urls = [
-//     "https://jsonplaceholder.typicode.com/posts/1",
-//     "https://jsonplaceholder.typicode.com/invalid-route",
-//     "https://fake-domain-xyz.com",
-//   ];
-
-//   const results = await apiClient.parallel(urls, {
-//     timeout: 3000,
-//     attempts: 2,
-//   });
-
-//   console.log(results);
-
-//   console.assert(results.length === 3, "Should return 3 results");
-
-//   const fulfilled = results.filter((r) => r.status === "fulfilled");
-//   const rejected = results.filter((r) => r.status === "rejected");
-
-//   console.assert(fulfilled.length >= 1, "Should have success");
-//   console.assert(rejected.length >= 1, "Should have failure");
-// }
-
-// async function runner() {
-//   await testParallelMixed();
-// }
-
-// runner();
+main("https://jsonplaceholder.typicode.com/posts/1", {
+  timeout: 3000,
+  attempts: 2,
+})
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
